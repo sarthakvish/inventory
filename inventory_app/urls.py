@@ -18,4 +18,8 @@ urlpatterns = [
     path('delete_history/', views.delete_history, name='delete_history'),
     path('import/', views.import_data, name='import'),
     path('export/', views.export_data, name='export'),
+
+    # urls for Invoice management
+    path('add_invoice/', views.add_invoice, name='add_invoice'),
+    path('list_invoice/', views.list_invoice, name='list_invoice'),
 ]

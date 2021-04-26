@@ -1,9 +1,7 @@
 from django.core.validators import RegexValidator
 from django.db import models
-# from django.contrib.auth.models import User, AbstractUser, BaseUserManager
-# from django.utils.translation import ugettext_lazy as _
-
-
+from django.contrib.auth.models import User, AbstractUser, BaseUserManager
+from django.utils.translation import ugettext_lazy as _
 #
 # class CustomUserManager(BaseUserManager):
 #     """Define a model manager for User model with no username field."""
@@ -38,15 +36,16 @@ from django.db import models
 #
 #         return self._create_user(phone, password, **extra_fields)
 # class CustomUser(AbstractUser):
-#     username = None
 #     phone_regex = RegexValidator(regex=r'^\+?1?\d{9,10}$',
 #                                  message="Phone number must be entered in the format: '+999999999'. Up to 10 digits allowed.")
-#     phone = models.CharField(validators=[phone_regex], max_length=10, unique=True,blank=False,
+#     phone = models.CharField(_('phone'),validators=[phone_regex], max_length=10,blank=False,
 #                                     null=False)  # validators should be a list
-#     USERNAME_FIELD = 'phone'
-#     REQUIRED_FIELDS = []
+#     USERNAME_FIELD = 'username'
+#     REQUIRED_FIELDS = ['phone']
 #
 #     objects = CustomUserManager()
+#     def __str__(self):
+#         return self.username
 # models for Normal app.
 class Stock(models.Model):
     unit = 'un'
@@ -91,6 +90,54 @@ class StockHistory(models.Model):
     reorder_level = models.IntegerField(default='0', blank=True, null=True)
     last_updated = models.DateTimeField(auto_now_add=False, auto_now=False, null=True)
     timestamp = models.DateTimeField(auto_now_add=False, auto_now=False, null=True)
+
+# Models for Invoice
+class Invoice(models.Model):
+    comments = models.TextField(max_length=3000, default='', blank=True, null=True)
+    invoice_number = models.IntegerField(blank=True, null=True)
+    invoice_date = models.DateField(auto_now_add=False, auto_now=False, blank=True, null=True)
+    name = models.CharField('Customer Name', max_length=120, default='', blank=True, null=True)
+
+    line_one = models.CharField('Line 1', max_length=120, default='', blank=True, null=True)
+    line_one_quantity = models.IntegerField('Quantity', default=0, blank=True, null=True)
+    line_one_unit_price = models.IntegerField('Unit Price (D)', default=0, blank=True, null=True)
+    line_one_total_price = models.IntegerField('Line Total (D)', default=0, blank=True, null=True)
+
+    line_two = models.CharField('Line 2', max_length=120, default='', blank=True, null=True)
+    line_two_quantity = models.IntegerField('Quantity', default=0, blank=True, null=True)
+    line_two_unit_price = models.IntegerField('Unit Price (D)', default=0, blank=True, null=True)
+    line_two_total_price = models.IntegerField('Line Total (D)', default=0, blank=True, null=True)
+
+    line_three = models.CharField('Line 3', max_length=120, default='', blank=True, null=True)
+    line_three_quantity = models.IntegerField('Quantity', default=0, blank=True, null=True)
+    line_three_unit_price = models.IntegerField('Unit Price (D)', default=0, blank=True, null=True)
+    line_three_total_price = models.IntegerField('Line Total (D)', default=0, blank=True, null=True)
+
+    line_four = models.CharField('Line 4', max_length=120, default='', blank=True, null=True)
+    line_four_quantity = models.IntegerField('Quantity', default=0, blank=True, null=True)
+    line_four_unit_price = models.IntegerField('Unit Price (D)', default=0, blank=True, null=True)
+    line_four_total_price = models.IntegerField('Line Total (D)', default=0, blank=True, null=True)
+
+    line_five = models.CharField('Line 5', max_length=120, default='', blank=True, null=True)
+    line_five_quantity = models.IntegerField('Quantity', default=0, blank=True, null=True)
+    line_five_unit_price = models.IntegerField('Unit Price (D)', default=0, blank=True, null=True)
+    line_five_total_price = models.IntegerField('Line Total (D)', default=0, blank=True, null=True)
+
+    phone_number = models.CharField(max_length=120, default='', blank=True, null=True)
+    total = models.IntegerField(default='0', blank=True, null=True)
+    balance = models.IntegerField(default='0', blank=True, null=True)
+    timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
+    last_updated = models.DateTimeField(auto_now_add=False, auto_now=True, blank=True)
+    paid = models.BooleanField(default=False)
+    invoice_type_choice = (
+        ('Receipt', 'Receipt'),
+        ('Proforma Invoice', 'Proforma Invoice'),
+        ('Invoice', 'Invoice'),
+    )
+    invoice_type = models.CharField(max_length=50, default='', blank=True, null=True, choices=invoice_type_choice)
+
+    def __unicode__(self):
+        return self.invoice_number
 # models for react app.
 class Provider(models.Model):
     id=models.AutoField(primary_key=True)
