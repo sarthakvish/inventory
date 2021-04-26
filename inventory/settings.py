@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'inventory_app',
+    'datascience',
     'crispy_forms',
     'django.contrib.sites',
     'allauth',
@@ -50,6 +51,7 @@ SITE_ID = 1
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
+    'django.contrib.auth.backends.ModelBackend',
     
 ]
 ACCOUNT_EMAIL_VERIFICATION = "none"
@@ -143,8 +145,20 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
+STATIC_ROOT=os.path.join(os.path.dirname(BASE_DIR),"static_cdn","static_root")
+MEDIA_URL='/media/'
+MEDIA_ROOT=os.path.join(os.path.dirname(BASE_DIR),"static_cdn","media_root")
 LOGIN_URL='/stock/'
 LOGIN_REDIRECT_URL = '/stock/'
 ACCOUNT_LOGOUT_REDIRECT_URL = '/accounts/login/'
 ACCOUNT_SIGNUP_REDIRECT_URL = '/stock'
 # AUTH_USER_MODEL = 'inventory_app.CustomUser'
+# ACCOUNT_USER_MODEL_USERNAME_FIELD = None
+# ACCOUNT_USERNAME_REQUIRED= 'phone'
+# # ACCOUNT_EMAIL_REQUIRED = True
+# # ACCOUNT_USERNAME_REQUIRED = True
+# ACCOUNT_AUTHENTICATION_METHOD = 'phone'
+# ACCOUNT_FORMS = {
+# 'signup': 'inventory_app.forms.CustomSignupForm',
+# }
+# ACCOUNT_EMAIL_REQUIRED = False

@@ -177,3 +177,26 @@ def export_data(request):
             return response
 
     return render(request, 'inventory_html/export.html')
+
+# views for Inovoice management
+from inventory_app.forms import InvoiceForm
+from inventory_app.models import Invoice
+def add_invoice(request):
+    form = InvoiceForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+        return redirect('/add_invoice')
+    context = {
+        "form": form,
+        "title": "New Invoice",
+    }
+    return render(request, "inventory_html/entry.html", context)
+
+def list_invoice(request):
+    title = 'List of Invoices'
+    queryset = Invoice.objects.all()
+    context = {
+        "title": title,
+        "queryset": queryset,
+    }
+    return render(request, "inventory_html/list_invoice.html", context)

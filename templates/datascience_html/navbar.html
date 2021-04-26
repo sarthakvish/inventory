@@ -1,17 +1,9 @@
 {% load static %}
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Kolentry</title>
-    <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" type="text/css" href="{% static 'css/dashboard.css' %}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="{% static 'css/main.css'%}">
-{#	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">#}
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1" />
-
-
-	<style>
+<style>
         {#navbar brand css#}
         .navbar{
                 border-bottom: 2px solid white;
@@ -47,8 +39,6 @@
 
 	</style>
 
-</head>
-<body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 	  <a class="navbar-brand" href="/stock">Kolentory</a>
       <marquee width="60%" direction="right" height="50px" style="color: white">
@@ -97,7 +87,6 @@ Let's manage Your inventory with us!
 		  </div>
             </nav>
 
-<!-- The sidebar -->
 {% if user.is_authenticated %}
     <div class="sidebar">
       <a href="/stock">Stock</a>
@@ -107,42 +96,3 @@ Let's manage Your inventory with us!
       <a href="/performance/chart/">Reports and Analysis</a>
     </div>
 {% endif %}
-
-       {% block sidebar %}
-        {% endblock %}
-
-    <div class="container">
-        <br>
-        {% block content %}
-        {% endblock %}
-    </div>
-	<br><br><br>
-
-
-
-
-
-
-
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
-<script type="text/javascript" src="{% static 'js/cart.js' %}"></script>
-
-
-
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
-<script>
-	$(document).ready( function () {
-    $('#table_id').DataTable();
-
-} );
-</script>
-
-
-</body>
-</html>
-
-
